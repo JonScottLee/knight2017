@@ -1,6 +1,6 @@
 import { moduleFor, test } from 'ember-qunit';
 
-moduleFor('route:player/equipment', 'Unit | Route | player/equipment', {
+moduleFor('route:player/gear', 'Unit | Route | player/gear', {
   // Specify the other units that are required for this test.
   // needs: ['controller:foo']
 });

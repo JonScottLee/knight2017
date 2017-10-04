@@ -8,31 +8,34 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('player', function() {
-    this.route('equipment', {
-      path: ':player_id'
+    this.route('stats', {
+      path: ':model_id/stats'
+    });
+
+    this.route('show', {
+      path: ':player_id/show'
     });
 
     this.route('items', {
-      path: ':player_id'
+      path: ':model_id/items'
+    });
+
+    this.route('skills', {
+      path: ':model_id/skills'
+    });
+
+    this.route('techs', {
+      path: ':model_id/techs'
+    });
+
+    this.route('gear', {
+      path: ':model_id/gear'
+    });
+
+    this.route('edit', {
+      path: ':model_id/edit'
     });
   });
-
-  this.route('shop', {
-    path: ':shop_id'
-  }, function() {
-    this.route('index', {
-      path: ':shop_id'
-    });
-
-    this.route('buy', {
-      path: ':shop_id'
-    });
-
-    this.route('sell', {
-      path: ':shop_id'
-    });
-  });
-  this.route('players');
 });
 
 export default Router;

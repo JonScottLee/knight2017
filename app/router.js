@@ -32,6 +32,7 @@ Router.map(function() {
       path: ':shop_id'
     });
   });
+  this.route('players');
 });
 
 export default Router;

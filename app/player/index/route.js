@@ -8,7 +8,23 @@ let player = [{
 export default Ember.Route.extend({
 
 	model() {
-		return player.objectAt(0)
+
+		let player;
+
+		const hasPlayer = this.store.hasRecordForId('player', 0);
+
+		if (!hasPlayer) {
+
+			player = this.store.createRecord('player', {
+				id: 0,
+				firstName:"Jon",
+				lastName: "Lee"
+			});
+
+			player.save();
+		}
+
+		return this.store.findAll('player');
 	}
 
 });

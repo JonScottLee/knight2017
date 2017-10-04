@@ -36,6 +36,7 @@ Router.map(function() {
       path: ':model_id/edit'
     });
   });
+  this.route('options');
 });
 
 export default Router;

@@ -1,1 +1,30 @@
-<h2>Items</h2>
+<h2 class="sub-header">Items</h2>
+
+<div class="table-responsive">
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>Qty</th>
+       <th>Name</th>
+       <th>Desc</th>
+       <th>Use</th>
+       <th>Drop</th>
+     </tr>
+   </thead>
+   <tbody>
+	{{#each model.items as |item|}}
+		<tr>
+			<td>{{item.quantity}}</td>
+			<td>{{item.name}} {{#link-to 'item.details' item.id}}(details){{/link-to}}</td>
+			<td>{{item.description}}</td>
+			<td>
+				<button class="btn btn-success btn-xs" {{action 'useItem' item}}>Use</button>
+			</td>
+			<td>
+				<button class="btn btn-primary btn-xs" {{action 'dropItem' item}}>Drop</button>
+			</td>
+		</tr>
+	{{/each}}
+   </tbody>
+ </table>
+</div>

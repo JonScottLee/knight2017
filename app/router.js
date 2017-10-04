@@ -12,10 +12,6 @@ Router.map(function() {
       path: ':model_id/stats'
     });
 
-    this.route('show', {
-      path: ':player_id/show'
-    });
-
     this.route('items', {
       path: ':model_id/items'
     });

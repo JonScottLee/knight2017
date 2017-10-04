@@ -1,9 +1,25 @@
 import Ember from 'ember';
 
-let player = [{
-  firstName: "Jon",
-  lastName: "Lee"
-}];
+let items = [
+	{
+		quantity: 1,
+		consumable: true,
+		name: "mana potion",
+		description: `It's not very impressive`
+	},
+	{
+		quantity: 1,
+		consumable: true,
+		name: "hi-potion",
+		description: `It's not very impressive`
+	},
+	{
+		quantity: 1,
+		consumable: true,
+		name: "phoenix down",
+		description: `It's not very impressive`
+	}
+];
 
 export default Ember.Route.extend({
 
@@ -23,7 +39,8 @@ export default Ember.Route.extend({
 			player = this.store.createRecord('player', {
 				id: 0,
 				firstName:"Jon",
-				lastName: "Lee"
+				lastName: "Lee",
+				items: items
 			});
 		}
 

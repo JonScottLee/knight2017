@@ -25,17 +25,23 @@ export default Ember.Route.extend({
 
 		let player;
 
-		const hasPlayer = this.store.hasRecordForId('player', 0);
+		this.store.findAll('player').then((thePlayer) => {
 
-		if (!hasPlayer) {
+			if (!thePlayer.get('length')) {
 
-			player = this.store.createRecord('player', {
-				id: 0,
-				firstName:"Jon",
-				lastName: "Lee",
-				items: this.getDefaultItems()
-			});
-		}
+				player = this.store.createRecord('player', {
+			 		id: 0,
+			 		firstName:"Jon",
+			 		lastName: "Lee",
+			 		items: this.getDefaultItems()
+			 	});
+
+			 	player.save();
+
+			 	return player;
+
+			}
+		});
 
 		return this.store.findAll('player');
 	}

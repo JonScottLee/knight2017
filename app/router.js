@@ -36,14 +36,11 @@ Router.map(function() {
       path: ':player_id/show'
     });
   });
+
   this.route('options');
 
-  this.route('items', {
-    path: ':item_id/show'
-  }, function() {});
-
   this.route('item', {
-    path: ':item_id/show'
+    path: 'item'
   }, function() {
     this.route('show', {
       path: ':item_id/show'

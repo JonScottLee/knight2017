@@ -15,7 +15,7 @@
 	{{#each model.items as |item|}}
 		<tr>
 			<td>{{item.quantity}}</td>
-			<td>{{item.name}}</td>
+			<td>{{item.name}} {{#link-to 'item.show' item}}(details){{/link-to}}</td>
 			<td>{{item.description}}</td>
 			<td>
 				<button class="btn btn-success btn-xs" {{action 'useItem' item}}>Use</button>

@@ -31,8 +31,24 @@ Router.map(function() {
     this.route('edit', {
       path: ':model_id/edit'
     });
+
+    this.route('show', {
+      path: ':player_id/show'
+    });
   });
   this.route('options');
+
+  this.route('items', {
+    path: ':item_id/show'
+  }, function() {});
+
+  this.route('item', {
+    path: ':item_id/show'
+  }, function() {
+    this.route('show', {
+      path: ':item_id/show'
+    });
+  });
 });
 
 export default Router;

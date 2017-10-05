@@ -1,1 +1,6 @@
-{{yield}}
+<tr>
+	<td>{{item.quantity}}</td>
+	<td>{{item.name}} {{#link-to 'item.show' item.id}}(details){{/link-to}}</td>
+	<td>{{item.description}}</td>
+	{{yield}}
+</tr>

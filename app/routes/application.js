@@ -30,7 +30,6 @@ export default Ember.Route.extend({
 			if (!thePlayer.get('length')) {
 
 				player = this.store.createRecord('player', {
-			 		id: 0,
 			 		firstName:"Jon",
 			 		lastName: "Lee",
 			 		items: this.getDefaultItems()

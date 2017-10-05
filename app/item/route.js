@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
 	model() {
-		return this.store.findAll('player');
+
+		return Ember.RSVP.hash({
+			player: this.store.findAll('player'),
+			item: this.store.findAll('item')
+		});
 	}
 });

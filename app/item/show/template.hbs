@@ -1,5 +1,14 @@
+{{#each model.player as |player|}}
+	{{#link-to "player.items" player}}
+		<button type="button" class="btn btn-default navbar-btn pull-left">
+			<span class="glyphicon glyphicon-chevron-left"></span>Back
+		</button>
+	{{/link-to}}
+{{/each}}
+
+
 <div class="page-header">
-	<h1>{{model.name}}</h1>
+	<h1>{{model.item.name}}</h1>
 </div>
 
-<p class="lead">{{model.description}}</p>
+<p class="lead">{{model.item.description}}</p>

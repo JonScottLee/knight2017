@@ -21,6 +21,26 @@ export default Ember.Route.extend({
 		return [item1];
 	},
 
+	makeDefaultShop () {
+		let shop;
+
+		this.store.findAll('player/shop').then((theShop) => {
+
+			if (!theShop.get('length')) {
+
+				shop = this.store.createRecord('player/shop', {
+					id: 0,
+			 		name: "WTF",
+			 		inventory: this.getDefaultItems()
+			 	});
+
+			 	shop.save();
+
+			 	return shop;
+			}
+		});
+	},
+
 	model() {
 
 		let player;
@@ -41,6 +61,8 @@ export default Ember.Route.extend({
 
 			}
 		});
+
+		this.makeDefaultShop();
 
 		return this.store.findAll('player');
 	}

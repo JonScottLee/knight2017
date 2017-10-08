@@ -35,6 +35,7 @@ Router.map(function() {
     this.route('show', {
       path: ':player_id/show'
     });
+    this.route('shop');
   });
 
   this.route('options');

@@ -6,19 +6,15 @@ export default Ember.Controller.extend({
 
 		buyItem (item, player) {
 
-			let newItem = this.store.createRecord('item');
+			item.copy().then((copy) => {
 
-			let name = item.get('name');
+				copy.set('owner', player);
 
-			newItem.set('name', name);
+				copy.save();
 
-			newItem.set('owner', player);
+				player.save();
 
-			newItem.save();
-
-			player.save();
-
+			});
 		}
 	}
-
 });

@@ -13,12 +13,30 @@ export default Ember.Route.extend({
 			quantity: 1,
 			consumable: true,
 			name: "mana potion",
-			description: `It's not very impressive`
+			description: `It's not very impressive.`
+		});
+
+		let gear1 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: false,
+			wearable: true,
+			name: "Jon's Awesome Sword",
+			description: `It's not really that awesome.`
+		});
+
+		let gear2 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: false,
+			wearable: true,
+			name: "Jon's Dashing Cape",
+			description: `It's not really that dashing.`
 		});
 
 		item1.save();
+		gear1.save();
+		gear2.save();
 
-		return [item1];
+		return [item1, gear1, gear2];
 	},
 
 	makeDefaultShop () {

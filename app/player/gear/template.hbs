@@ -1,1 +1,33 @@
-<h2>Gear</h2>
+<h2 class="sub-header">Items</h2>
+
+<div class="table-responsive">
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>Qty</th>
+       <th>Name</th>
+       <th>Desc</th>
+       <th>Equip</th>
+       <th>Remove</th>
+       <th>Drop</th>
+     </tr>
+   </thead>
+   <tbody>
+	{{#each model.items as |item|}}
+		{{#if item.wearable}}
+  			{{#item/card--mini item=item tagName=""}}
+	  			<td>
+	  				<button class="btn btn-success btn-xs" {{action 'equip' item}}>Equip</button>
+	  			</td>
+	  			<td>
+	  				<button class="btn btn-warning btn-xs" {{action 'remove' item}}>Remove</button>
+	  			</td>
+	  			<td>
+	  				<button class="btn btn-danger btn-xs" {{action 'drop' item}}>Drop</button>
+	  			</td>
+  			{{/item/card--mini}}
+   		{{/if}}
+	{{/each}}
+  </tbody>
+ </table>
+</div>

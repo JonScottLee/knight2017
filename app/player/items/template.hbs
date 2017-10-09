@@ -13,15 +13,17 @@
    </thead>
    <tbody>
 	{{#each model.items as |item|}}
-		{{#item/card--mini item=item tagName=""}}
-			<td>
-				<button class="btn btn-success btn-xs" {{action 'useItem' item}}>Use</button>
-			</td>
-			<td>
-				<button class="btn btn-primary btn-xs" {{action 'dropItem' item}}>Drop</button>
-			</td>
-		{{/item/card--mini}}
+    {{#if item.consumable}}
+  		{{#item/card--mini item=item tagName=""}}
+  			<td>
+  				<button class="btn btn-success btn-xs" {{action 'useItem' item}}>Use</button>
+  			</td>
+  			<td>
+  				<button class="btn btn-primary btn-xs" {{action 'dropItem' item}}>Drop</button>
+  			</td>
+  		{{/item/card--mini}}
+    {{/if}}
 	{{/each}}
-   </tbody>
+  </tbody>
  </table>
 </div>

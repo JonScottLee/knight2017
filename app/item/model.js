@@ -2,10 +2,11 @@ import DS from 'ember-data';
 import Copyable from 'ember-cli-copyable';
 
 export default DS.Model.extend(Copyable, {
-  name: DS.attr('string'),
-  quantity: DS.attr('number'),
-  description: DS.attr('string'),
   consumable: DS.attr('boolean'),
+  description: DS.attr('string'),
+  name: DS.attr('string'),
+  owner: DS.belongsTo('player'),
+  quantity: DS.attr('number'),
   value: DS.attr('number'),
-  owner: DS.belongsTo('player')
+  wearable: DS.attr('boolean')
 });

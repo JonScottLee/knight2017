@@ -42,6 +42,15 @@ export default Ember.Route.extend({
 	makeDefaultShop () {
 		let shop;
 
+		let item1 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: true,
+			name: "mana potion",
+			description: `It's not very impressive.`
+		});
+
+		item1.save();
+
 		this.store.findAll('player/shop').then((theShop) => {
 
 			if (!theShop.get('length')) {
@@ -49,7 +58,7 @@ export default Ember.Route.extend({
 				shop = this.store.createRecord('player/shop', {
 					id: 0,
 			 		name: "WTF",
-			 		inventory: this.getDefaultItems()
+			 		inventory: [item1]
 			 	});
 
 			 	shop.save();

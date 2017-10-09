@@ -1,8 +1,10 @@
 <h2 class="sub-header">Shop</h2>
 
-{{#each model.player.items as |playerItem|}}
-{{playerItem.name}}
-{{/each}}
+{{#if boughtItemName}}
+  <div class="alert alert-success">
+    Purchased <strong>{{boughtItemName}}</strong> x1
+  </div>
+{{/if}}
 
 <div class="table-responsive">
  <table class="table table-striped">

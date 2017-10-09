@@ -2,6 +2,8 @@ import Ember from 'ember';
 
 export default Ember.Controller.extend({
 
+	boughtItemName: null,
+
 	actions: {
 
 		buyItem (item, player) {
@@ -13,6 +15,8 @@ export default Ember.Controller.extend({
 				copy.save();
 
 				player.save();
+
+				this.set('boughtItemName', item.get('name'));
 
 			});
 		}

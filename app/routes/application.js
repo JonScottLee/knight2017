@@ -14,7 +14,8 @@ export default Ember.Route.extend({
 			wearable: true,
 			name: "Jon's Awesome Sword",
 			description: `It's not really that awesome.`,
-			cost: 2000
+			cost: 2000,
+			sellValue: parseInt(2000 * .8, 10)
 		});
 
 		let gear2 = this.store.createRecord('item', {
@@ -23,7 +24,8 @@ export default Ember.Route.extend({
 			wearable: true,
 			name: "Jon's Dashing Cape",
 			description: `It's not really that dashing.`,
-			cost: 1250
+			cost: 1250,
+			sellValue: parseInt(1250 * .8, 10)
 		});
 
 		gear1.save();
@@ -39,7 +41,8 @@ export default Ember.Route.extend({
 			consumable: true,
 			name: "mana potion",
 			description: `It's not very impressive.`,
-			cost: 200
+			cost: 200,
+			sellValue: parseInt(200 * .8, 10)
 		});
 
 		let item2 = this.store.createRecord('item', {
@@ -47,7 +50,8 @@ export default Ember.Route.extend({
 			consumable: true,
 			name: "revive",
 			description: `d e a d b o y e doin a lazarus`,
-			cost: 20000
+			cost: 20000,
+			sellValue: parseInt(20000 * .8, 10)
 		});
 
 		item1.save();
@@ -64,7 +68,8 @@ export default Ember.Route.extend({
 			consumable: true,
 			name: "mana potion",
 			description: `It's not very impressive.`,
-			cost: 20000
+			cost: 20000,
+			sellValue: parseInt(20000 * .8, 10)
 		});
 
 		item1.save();
@@ -76,7 +81,7 @@ export default Ember.Route.extend({
 				shop = this.store.createRecord('player/shop', {
 					id: 0,
 			 		name: "WTF",
-			 		inventory: this.getDefaultItems()
+			 		inventory: [item1]
 			 	});
 
 			 	shop.save();

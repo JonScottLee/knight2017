@@ -23,6 +23,22 @@ export default Ember.Controller.extend({
 				this.set('boughtItemName', item.get('name'));
 
 			});
+		},
+
+		sell (item, player, shop) {
+			let playerCash = player.get('cash');
+
+			player.set('cash', playerCash += item.get('sellValue'));
+
+			player.get('items').removeObject(item);
+
+			shop.get('inventory').pushObject(item);
+
+			item.save();
+
+			shop.save();
+
+			player.save();
 		}
 	}
 });

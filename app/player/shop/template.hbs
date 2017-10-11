@@ -8,31 +8,66 @@
 
 <blockquote>Player Cash: {{model.player.cash}}</blockquote>
 
-<div class="table-responsive">
- <table class="table table-striped">
-   <thead>
-     <tr>
-       <th>Qty</th>
-       <th>Name</th>
-       <th>Desc</th>
-       <th>Cost</th>
-       <th>Actions</th>
-     </tr>
-   </thead>
-   <tbody>
-	{{#each model.shop.inventory as |item|}}
-		{{#item/card--mini
-      item=item
-      player=model.player
-      tagName=""}}
-      <td>
-        <strong>{{item.cost}}</strong>
-      </td>
-      <td>
-        <button disabled={{lt model.player.cash item.cost}} class="btn btn-success btn-xs" {{action 'buy' item model.player}}>Buy</button>
-      </td>
-    {{/item/card--mini}}
-	{{/each}}
-   </tbody>
- </table>
+<div class="col-md-6">
+  <h4>Shop Items</h4>
+  <div class="table-responsive">
+   <table class="table table-striped">
+     <thead>
+       <tr>
+         <th>Qty</th>
+         <th>Name</th>
+         <th>Desc</th>
+         <th>Cost</th>
+         <th>Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+  	{{#each model.shop.inventory as |item|}}
+  		{{#item/card--mini
+        item=item
+        player=model.player
+        tagName=""}}
+        <td>
+          <strong>{{item.cost}}</strong>
+        </td>
+        <td>
+          <button disabled={{lt model.player.cash item.cost}} class="btn btn-success btn-xs" {{action 'buy' item model.player}}>Buy</button>
+        </td>
+      {{/item/card--mini}}
+  	{{/each}}
+     </tbody>
+   </table>
+  </div>
+</div>
+
+<div class="col-md-6">
+  <h4>Your Items</h4>
+  <div class="table-responsive">
+   <table class="table table-striped">
+     <thead>
+       <tr>
+         <th>Qty</th>
+         <th>Name</th>
+         <th>Desc</th>
+         <th>Sell Value</th>
+         <th>Actions</th>
+       </tr>
+     </thead>
+     <tbody>
+    {{#each model.player.items as |item|}}
+      {{#item/card--mini
+        item=item
+        player=model.player
+        tagName=""}}
+        <td>
+          <strong>{{item.sellValue}}</strong>
+        </td>
+        <td>
+          <button class="btn btn-primary btn-xs" {{action 'sell' item model.player model.shop}}>Sell</button>
+        </td>
+      {{/item/card--mini}}
+    {{/each}}
+     </tbody>
+   </table>
+  </div>
 </div>

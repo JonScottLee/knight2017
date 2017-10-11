@@ -21,12 +21,15 @@
    </thead>
    <tbody>
 	{{#each model.shop.inventory as |item|}}
-		{{#item/card--mini item=item player=model.player tagName=""}}
+		{{#item/card--mini
+      item=item
+      player=model.player
+      tagName=""}}
       <td>
         <strong>{{item.cost}}</strong>
       </td>
       <td>
-        <button disabled={{lt model.player.cash item.cost}} class="btn btn-success btn-xs" {{action 'buyItem' item model.player}}>Buy</button>
+        <button disabled={{lt model.player.cash item.cost}} class="btn btn-success btn-xs" {{action 'buy' item model.player}}>Buy</button>
       </td>
     {{/item/card--mini}}
 	{{/each}}

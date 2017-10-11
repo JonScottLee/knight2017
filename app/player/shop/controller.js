@@ -6,7 +6,11 @@ export default Ember.Controller.extend({
 
 	actions: {
 
-		buyItem (item, player) {
+		buy (item, player) {
+
+			let playerCash = player.get('cash');
+
+			player.set('cash', playerCash -= item.get('cost'));
 
 			item.copy().then((copy) => {
 

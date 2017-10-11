@@ -2,6 +2,28 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 
+	displayedQuantity: Ember.computed(function () {
+
+		let that = this;
+
+		let rawQty;
+
+		Promise.resolve(this.get('item')).then((item) => {
+
+			rawQty = item.get('quantity');
+
+			if (rawQty === Infinity) {
+
+				that.set('displayedQuantity', "∞");
+
+				return;
+			}
+
+			that.set("displayedQuantity", rawQty);
+
+		});
+	}),
+
 	costColor: 'black',
 
 	isDisabled: Ember.computed(function () {

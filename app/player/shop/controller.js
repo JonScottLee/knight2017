@@ -12,11 +12,14 @@ export default Ember.Controller.extend({
 
 			player.set('cash', playerCash -= item.get('cost'));
 
-			if (item.get('isInfinite')) {
+			if (item.get('quantity') === Infinity) {
 
 				item.copy().then((copy) => {
 
-					copy.set('owner', player);
+					copy.setProperties({
+						owner: player,
+						quantity: 1
+					});
 
 					copy.save();
 

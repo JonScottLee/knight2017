@@ -7,7 +7,7 @@ export default DS.Model.extend(Copyable, {
   description: DS.attr('string'),
   name: DS.attr('string'),
   owner: DS.belongsTo('player'),
-  quantity: DS.attr('number'),
+  quantity: DS.attr(),
   isInfinite: DS.attr('boolean'),
   value: DS.attr('number'),
   wearable: DS.attr('boolean'),

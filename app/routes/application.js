@@ -64,7 +64,7 @@ export default Ember.Route.extend({
 		let shop;
 
 		let item1 = this.store.createRecord('item', {
-			quantity: 1,
+			quantity: Infinity,
 			consumable: true,
 			name: "mana potion",
 			description: `It's not very impressive.`,

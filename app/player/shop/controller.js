@@ -6,33 +6,53 @@ export default Ember.Controller.extend({
 
 	actions: {
 
-		buy (item, player) {
+		buy (item, player, shop) {
 
 			let playerCash = player.get('cash');
 
 			player.set('cash', playerCash -= item.get('cost'));
 
-			item.copy().then((copy) => {
+			if (item.get('isInfinite')) {
 
-				copy.set('owner', player);
+				item.copy().then((copy) => {
 
-				copy.save();
+					copy.set('owner', player);
 
-				player.save();
+					copy.save();
 
-				this.set('boughtItemName', item.get('name'));
+					player.save();
 
-			});
+					this.set('boughtItemName', item.get('name'));
+
+				});
+
+			} else {
+
+				shop.get('inventory').removeObject(item);
+
+				player.get('items').pushObject(item);
+
+			}
 		},
 
 		sell (item, player, shop) {
 			let playerCash = player.get('cash');
 
+			let shopInventory = shop.get('inventory');
+
+			let shopInstanceItem = shopInventory.filterBy('name', item.get('name'));
+
+			let shopHasItem = shopInstanceItem .length;
+
 			player.set('cash', playerCash += item.get('sellValue'));
 
 			player.get('items').removeObject(item);
 
-			shop.get('inventory').pushObject(item);
+			if (!shopHasItem) {
+
+				shopInventory.pushObject(item);
+
+			};
 
 			item.save();
 

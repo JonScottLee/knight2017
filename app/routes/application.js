@@ -50,8 +50,8 @@ export default Ember.Route.extend({
 			consumable: true,
 			name: "revive",
 			description: `d e a d b o y e doin a lazarus`,
-			cost: 20000,
-			sellValue: parseInt(20000 * .8, 10)
+			cost: 1000,
+			sellValue: parseInt(1000 * .8, 10)
 		});
 
 		item1.save();
@@ -68,8 +68,9 @@ export default Ember.Route.extend({
 			consumable: true,
 			name: "mana potion",
 			description: `It's not very impressive.`,
-			cost: 20000,
-			sellValue: parseInt(20000 * .8, 10)
+			cost: 200,
+			sellValue: parseInt(1000 * .8, 10),
+			isInfinite: true
 		});
 
 		item1.save();

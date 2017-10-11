@@ -2,5 +2,8 @@
 	<td>{{item.quantity}}</td>
 	<td>{{item.name}} {{#link-to 'item.show' item.id}}(details){{/link-to}}</td>
 	<td>{{item.description}}</td>
-	{{yield}}
+	<td style="color: {{costColor}}"><strong>{{item.cost}}</strong></td>
+	<td>
+		<button disabled={{isDisabled}} class="btn btn-success btn-xs" {{action 'buyItem' item model.player}}>{{#if isDisabled}}Too Expensive{{else}}Buy{{/if}}</button>
+	</td>
 </tr>

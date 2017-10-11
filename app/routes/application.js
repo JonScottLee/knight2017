@@ -7,21 +7,14 @@ export default Ember.Route.extend({
 		controller.set('model', model.objectAt(0));
 	},
 
-	getDefaultItems () {
-
-		let item1 = this.store.createRecord('item', {
-			quantity: 1,
-			consumable: true,
-			name: "mana potion",
-			description: `It's not very impressive.`
-		});
-
+	getDefaultGear () {
 		let gear1 = this.store.createRecord('item', {
 			quantity: 1,
 			consumable: false,
 			wearable: true,
 			name: "Jon's Awesome Sword",
-			description: `It's not really that awesome.`
+			description: `It's not really that awesome.`,
+			cost: 2000
 		});
 
 		let gear2 = this.store.createRecord('item', {
@@ -29,14 +22,38 @@ export default Ember.Route.extend({
 			consumable: false,
 			wearable: true,
 			name: "Jon's Dashing Cape",
-			description: `It's not really that dashing.`
+			description: `It's not really that dashing.`,
+			cost: 1250
 		});
 
-		item1.save();
 		gear1.save();
 		gear2.save();
 
-		return [item1, gear1, gear2];
+		return [gear1, gear2];
+	},
+
+	getDefaultItems () {
+
+		let item1 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: true,
+			name: "mana potion",
+			description: `It's not very impressive.`,
+			cost: 200
+		});
+
+		let item2 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: true,
+			name: "revive",
+			description: `d e a d b o y e doin a lazarus`,
+			cost: 20000
+		});
+
+		item1.save();
+		item2.save();
+
+		return [item1, item2];
 	},
 
 	makeDefaultShop () {
@@ -46,7 +63,8 @@ export default Ember.Route.extend({
 			quantity: 1,
 			consumable: true,
 			name: "mana potion",
-			description: `It's not very impressive.`
+			description: `It's not very impressive.`,
+			cost: 20000
 		});
 
 		item1.save();
@@ -58,7 +76,7 @@ export default Ember.Route.extend({
 				shop = this.store.createRecord('player/shop', {
 					id: 0,
 			 		name: "WTF",
-			 		inventory: [item1]
+			 		inventory: this.getDefaultItems()
 			 	});
 
 			 	shop.save();
@@ -79,7 +97,9 @@ export default Ember.Route.extend({
 				player = this.store.createRecord('player', {
 			 		firstName:"Jon",
 			 		lastName: "Lee",
-			 		items: this.getDefaultItems()
+			 		items: this.getDefaultItems(),
+			 		gear: this.getDefaultGear(),
+			 		cash: 1525
 			 	});
 
 			 	player.save();

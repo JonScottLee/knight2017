@@ -13,16 +13,13 @@
        <th>Qty</th>
        <th>Name</th>
        <th>Desc</th>
+       <th>Cost</th>
        <th>Actions</th>
      </tr>
    </thead>
    <tbody>
 	{{#each model.shop.inventory as |item|}}
-		{{#item/card--mini item=item tagName=""}}
-			<td>
-				<button class="btn btn-success btn-xs" {{action 'buyItem' item model.player}}>Buy</button>
-			</td>
-		{{/item/card--mini}}
+		{{item/card--mini item=item player=model.player tagName=""}}
 	{{/each}}
    </tbody>
  </table>

@@ -3,6 +3,7 @@ import Copyable from 'ember-cli-copyable';
 
 export default DS.Model.extend(Copyable, {
   consumable: DS.attr('boolean'),
+  cost: DS.attr('number'),
   description: DS.attr('string'),
   name: DS.attr('string'),
   owner: DS.belongsTo('player'),

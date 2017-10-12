@@ -7,31 +7,13 @@ export default Ember.Route.extend({
 		controller.set('model', model.objectAt(0));
 	},
 
-	getDefaultGear () {
-		let gear1 = this.store.createRecord('item', {
-			quantity: 1,
-			consumable: false,
-			wearable: true,
-			name: "Jon's Awesome Sword",
-			description: `It's not really that awesome.`,
-			cost: 2000,
-			sellValue: parseInt(2000 * .8, 10)
-		});
-
-		let gear2 = this.store.createRecord('item', {
-			quantity: 1,
-			consumable: false,
-			wearable: true,
-			name: "Jon's Dashing Cape",
-			description: `It's not really that dashing.`,
-			cost: 1250,
-			sellValue: parseInt(1250 * .8, 10)
-		});
-
-		gear1.save();
-		gear2.save();
-
-		return [gear1, gear2];
+	getStats () {
+		return {
+			hp:100,
+			mp: 20,
+			def: 10,
+			atk: 10
+		};
 	},
 
 	getDefaultItems () {
@@ -54,10 +36,45 @@ export default Ember.Route.extend({
 			sellValue: parseInt(1000 * .8, 10)
 		});
 
+		let gear1 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: false,
+			wearable: true,
+			name: "Jon's Awesome Sword",
+			description: `It's not really that awesome.`,
+			cost: 2000,
+			sellValue: parseInt(2000 * .8, 10),
+			type: 'weapon',
+			subType: 'sword',
+			stats: {
+				atk: 10,
+				def: 5
+			}
+		});
+
+		let gear2 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: false,
+			wearable: true,
+			name: "Jon's Dashing Cape",
+			description: `It's not really that dashing.`,
+			cost: 1250,
+			sellValue: parseInt(1250 * .8, 10),
+			type: 'accessory',
+			subType: 'back',
+			stats: {
+				hp: 10,
+				def: 1
+			}
+		});
+
+		gear1.save();
+		gear2.save();
+
 		item1.save();
 		item2.save();
 
-		return [item1, item2];
+		return [item1, item2, gear1, gear2];
 	},
 
 	makeDefaultShop () {
@@ -103,9 +120,9 @@ export default Ember.Route.extend({
 				player = this.store.createRecord('player', {
 			 		firstName:"Jon",
 			 		lastName: "Lee",
-			 		items: this.getDefaultItems(),
-			 		gear: this.getDefaultGear(),
-			 		cash: 1525
+			 		inventory: this.getDefaultItems(),
+			 		cash: 1525,
+			 		stats: this.getStats()
 			 	});
 
 			 	player.save();

@@ -33,7 +33,7 @@ export default Ember.Controller.extend({
 
 				shop.get('inventory').removeObject(item);
 
-				player.get('items').pushObject(item);
+				player.get('inventory').pushObject(item);
 
 			}
 		},
@@ -49,7 +49,7 @@ export default Ember.Controller.extend({
 
 			player.set('cash', playerCash += item.get('sellValue'));
 
-			player.get('items').removeObject(item);
+			player.get('inventory').removeObject(item);
 
 			if (!shopHasItem) {
 

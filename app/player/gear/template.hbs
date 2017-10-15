@@ -18,7 +18,7 @@
   			{{#item/card--mini item=item tagName=""}}
           {{#if item.equipped}}
             <td>
-              <strong style="color: green">Equipped</strong>
+              <span class="badge" style="background-color: #5cb85c">Equipped</span>
             </td>
             <td>
               <button class="btn btn-warning btn-xs" {{action 'remove' item model}}>Remove</button>
@@ -39,18 +39,30 @@
  </table>
 </div>
 
-{{#each model.equippedItems as |item|}}
-  {{#if item.wearable}}
-      {{#item/card--mini item=item tagName=""}}
-        <td>
-          <button class="btn btn-success btn-xs" {{action 'equip' item model}}>Equip</button>
-        </td>
-        <td>
-          <button class="btn btn-warning btn-xs" {{action 'remove' item model}}>Remove</button>
-        </td>
-        <td>
-          <button class="btn btn-danger btn-xs" {{action 'drop' item}}>Drop</button>
-        </td>
-      {{/item/card--mini}}
-    {{/if}}
-{{/each}}
+<div class="table-responsive">
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>Stat</th>
+       <th>Base Value</th>
+       <th>Mod. Value</th>
+     </tr>
+   </thead>
+   <tbody>
+  {{#each-in model.stats as |stat value|}}
+    <tr>
+      <td>
+        {{stat}}
+      </td>
+      <td>
+        {{value}}
+      </td>
+      <td>
+        <strong style="color: limegreen">{{value}}</strong>
+        {{player/stat-modifier stat model.items}}
+      </td>
+    </tr>
+  {{/each-in}}
+  </tbody>
+ </table>
+</div>

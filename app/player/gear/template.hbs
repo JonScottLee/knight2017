@@ -7,21 +7,28 @@
        <th>Qty</th>
        <th>Name</th>
        <th>Desc</th>
-       <th>Equip</th>
-       <th>Remove</th>
+       <th></th>
+       <th>Actions</th>
        <th>Drop</th>
      </tr>
    </thead>
    <tbody>
-	{{#each model.items as |item|}}
+	{{#each model.inventory as |item|}}
 		{{#if item.wearable}}
   			{{#item/card--mini item=item tagName=""}}
-	  			<td>
-	  				<button class="btn btn-success btn-xs" {{action 'equip' item}}>Equip</button>
-	  			</td>
-	  			<td>
-	  				<button class="btn btn-warning btn-xs" {{action 'remove' item}}>Remove</button>
-	  			</td>
+          {{#if item.equipped}}
+            <td>
+              <strong style="color: green">Equipped</strong>
+            </td>
+            <td>
+              <button class="btn btn-warning btn-xs" {{action 'remove' item model}}>Remove</button>
+            </td>
+          {{else}}
+            <td></td>
+            <td>
+              <button class="btn btn-success btn-xs" {{action 'equip' item model}}>Equip</button>
+            </td>
+          {{/if}}
 	  			<td>
 	  				<button class="btn btn-danger btn-xs" {{action 'drop' item}}>Drop</button>
 	  			</td>
@@ -31,3 +38,19 @@
   </tbody>
  </table>
 </div>
+
+{{#each model.equippedItems as |item|}}
+  {{#if item.wearable}}
+      {{#item/card--mini item=item tagName=""}}
+        <td>
+          <button class="btn btn-success btn-xs" {{action 'equip' item model}}>Equip</button>
+        </td>
+        <td>
+          <button class="btn btn-warning btn-xs" {{action 'remove' item model}}>Remove</button>
+        </td>
+        <td>
+          <button class="btn btn-danger btn-xs" {{action 'drop' item}}>Drop</button>
+        </td>
+      {{/item/card--mini}}
+    {{/if}}
+{{/each}}

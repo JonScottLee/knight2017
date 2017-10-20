@@ -1,9 +1,24 @@
 import Ember from 'ember';
 
-export function playerStatModifier(stat, items) {
+export function playerStatModifier(params) {
 
+	let theStat = params[0];
+	let unmodifiedStatValue = params[1];
+	let items = params[2].get('inventory');
 
+	let finalModValue = 0;
 
+	items.forEach(function (item) {
+		if (
+			item.get('equipped')
+			&& item.get('stats')
+			&& item.get('stats')[theStat]
+		) {
+			finalModValue += parseInt(item.get('stats')[theStat], 10);
+		}
+	});
+
+	return unmodifiedStatValue + finalModValue;
 }
 
 export default Ember.Helper.helper(playerStatModifier);

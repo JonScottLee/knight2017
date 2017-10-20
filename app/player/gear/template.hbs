@@ -44,8 +44,7 @@
    <thead>
      <tr>
        <th>Stat</th>
-       <th>Base Value</th>
-       <th>Mod. Value</th>
+       <th>Value</th>
      </tr>
    </thead>
    <tbody>
@@ -55,11 +54,7 @@
         {{stat}}
       </td>
       <td>
-        {{value}}
-      </td>
-      <td>
-        <strong style="color: limegreen">{{value}}</strong>
-        {{player/stat-modifier stat model.items}}
+          {{value}} &rarr; <span class="badge" style="background: limegreen">{{player/stat-modifier stat value model}}</span>
       </td>
     </tr>
   {{/each-in}}

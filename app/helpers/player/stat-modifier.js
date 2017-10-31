@@ -1,8 +1,9 @@
 import Ember from 'ember';
+import Helper from "@ember/component/helper";
 
-export function playerStatModifier(params) {
-
-	let theStat = params[0];
+export default Helper.extend({
+  compute(params) {
+    let theStat = params[0];
 	let unmodifiedStatValue = params[1];
 	let items = params[2].get('inventory');
 
@@ -19,6 +20,5 @@ export function playerStatModifier(params) {
 	});
 
 	return unmodifiedStatValue + finalModValue;
-}
-
-export default Ember.Helper.helper(playerStatModifier);
+  }
+});

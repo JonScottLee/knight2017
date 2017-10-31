@@ -12,9 +12,7 @@ Router.map(function() {
       path: ':model_id/stats'
     });
 
-    this.route('items', {
-      path: ':model_id/items'
-    });
+    this.route('items');
 
     this.route('skills', {
       path: ':model_id/skills'
@@ -35,6 +33,7 @@ Router.map(function() {
     this.route('show', {
       path: ':player_id/show'
     });
+
     this.route('shop');
   });
 

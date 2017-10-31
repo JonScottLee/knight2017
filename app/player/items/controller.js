@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
 		},
 
 		dropItem (item) {
-			item.destroyRecord();
+			console.info("dropitem from controller");
 		}
 
 	}

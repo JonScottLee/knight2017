@@ -77,6 +77,28 @@ export default Ember.Route.extend({
 		return [item1, item2, gear1, gear2];
 	},
 
+	makeDefaultPlayer () {
+		let player;
+
+		this.store.findAll('player').then((thePlayer) => {
+
+			if (!thePlayer.get('length')) {
+
+				player = this.store.createRecord('player', {
+			 		firstName:"Jon",
+			 		lastName: "Lee",
+			 		inventory: this.getDefaultItems(),
+			 		cash: 1525,
+			 		stats: this.getStats()
+			 	});
+
+			 	player.save();
+
+			 	return player;
+			}
+		});
+	},
+
 	makeDefaultShop () {
 		let shop;
 
@@ -111,26 +133,7 @@ export default Ember.Route.extend({
 
 	model() {
 
-		let player;
-
-		this.store.findAll('player').then((thePlayer) => {
-
-			if (!thePlayer.get('length')) {
-
-				player = this.store.createRecord('player', {
-			 		firstName:"Jon",
-			 		lastName: "Lee",
-			 		inventory: this.getDefaultItems(),
-			 		cash: 1525,
-			 		stats: this.getStats()
-			 	});
-
-			 	player.save();
-
-			 	return player;
-
-			}
-		});
+		this.makeDefaultPlayer();
 
 		this.makeDefaultShop();
 

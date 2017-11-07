@@ -22,9 +22,7 @@ Router.map(function() {
       path: ':model_id/techs'
     });
 
-    this.route('gear', {
-      path: ':model_id/gear'
-    });
+    this.route('gear');
 
     this.route('edit', {
       path: ':model_id/edit'

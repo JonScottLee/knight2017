@@ -13,7 +13,7 @@
      </tr>
    </thead>
    <tbody>
-	{{#each model.inventory as |item|}}
+	{{#each model.player.inventory as |item|}}
 		{{#if item.wearable}}
   			{{#item/card--mini item=item tagName=""}}
           {{#if item.equipped}}
@@ -48,13 +48,13 @@
      </tr>
    </thead>
    <tbody>
-  {{#each-in model.stats as |stat value|}}
+  {{#each-in model.player.stats as |stat baseValue|}}
     <tr>
       <td>
         {{stat}}
       </td>
       <td>
-          {{value}} &rarr; <span class="badge" style="background: limegreen">{{player/stat-modifier stat value model}}</span>
+          {{baseValue}} &rarr; <span class="badge" style="background: limegreen">{{player/stat-modifier stat baseValue model.player.inventory}}</span>
       </td>
     </tr>
   {{/each-in}}

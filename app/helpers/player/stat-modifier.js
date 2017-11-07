@@ -5,11 +5,11 @@ export default Helper.extend({
   compute(params) {
     let theStat = params[0];
 	let unmodifiedStatValue = params[1];
-	let items = params[2].get('inventory');
+	let items;
 
 	let finalModValue = 0;
 
-	items.forEach(function (item) {
+	params[2].forEach(function (item) {
 		if (
 			item.get('equipped')
 			&& item.get('stats')

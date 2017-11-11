@@ -12,9 +12,7 @@ Router.map(function() {
 
     this.route('items');
 
-    this.route('skills', {
-      path: ':model_id/skills'
-    });
+    this.route('skills');
 
     this.route('techs', {
       path: ':model_id/techs'
@@ -40,6 +38,14 @@ Router.map(function() {
   }, function() {
     this.route('show', {
       path: ':item_id/show'
+    });
+  });
+
+  this.route('skill', {
+    path: 'skill'
+  }, function() {
+    this.route('show', {
+      path: ':skill_id/show'
     });
   });
 });

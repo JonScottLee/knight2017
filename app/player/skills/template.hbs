@@ -1,1 +1,23 @@
-<h2>Skills</h2>
+<h2 class="sub-header">Skills</h2>
+<div class="table-responsive">
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>Name</th>
+       <th>Desc</th>
+       <th>Current Level</th>
+       <th>Max Level</th>
+     </tr>
+   </thead>
+   <tbody>
+	{{#each model.player.skills as |skill|}}
+		<tr>
+			<td>{{skill.friendlyName}} ({{#link-to 'skill.show' skill.id}}details{{/link-to}})</td>
+			<td>{{skill.description}}</td>
+			<td>{{skill.currentLevel}}</td>
+			<td>{{skill.maxLevel}}</td>
+		</tr>
+	{{/each}}
+   </tbody>
+ </table>
+</div>

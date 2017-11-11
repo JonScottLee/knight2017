@@ -6,5 +6,6 @@ export default DS.Model.extend({
 	inventory: DS.hasMany('item'),
 	equippedItems: DS.hasMany('item'),
 	lastName: DS.attr('string'),
-	stats: DS.attr()
+	stats: DS.attr(),
+	skills: DS.hasMany('skill')
 });

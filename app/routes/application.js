@@ -16,6 +16,25 @@ export default Ember.Route.extend({
 		};
 	},
 
+	getDefaultSkills () {
+
+		let player = this.store.peekAll('player');
+
+		let skill1 = this.store.createRecord('skill', {
+			currentLevel: 1,
+			description: 'Your skill at wielding one-handed swords.',
+			friendlyName: 'One-Handed Swords',
+			id: 'oneHandedSwords',
+			maxLevel: 1000,
+			name: 'oneHandedSwords',
+			player: player
+		});
+
+		skill1.save();
+
+		return [skill1];
+	},
+
 	getDefaultItems () {
 
 		let item1 = this.store.createRecord('item', {
@@ -89,7 +108,8 @@ export default Ember.Route.extend({
 			 		lastName: "Lee",
 			 		inventory: this.getDefaultItems(),
 			 		cash: 1525,
-			 		stats: this.getStats()
+			 		stats: this.getStats(),
+			 		skills: this.getDefaultSkills(),
 			 	});
 
 			 	player.save();

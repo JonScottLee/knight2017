@@ -8,9 +8,7 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('player', function() {
-    this.route('stats', {
-      path: ':model_id/stats'
-    });
+    this.route('stats');
 
     this.route('items');
 

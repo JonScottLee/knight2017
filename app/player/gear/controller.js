@@ -4,11 +4,6 @@ export default Ember.Controller.extend({
 
 	actions: {
 
-		equip (item, player) {
-			item.set('equipped', true);
-			item.save();
-		},
-
 		remove (item, player) {
 			item.set('equipped', false);
 			item.save();

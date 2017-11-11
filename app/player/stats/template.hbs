@@ -1,1 +1,24 @@
 <h2>Stats</h2>
+
+<div class="table-responsive">
+ <table class="table table-striped">
+   <thead>
+     <tr>
+       <th>Stat</th>
+       <th>Value</th>
+     </tr>
+   </thead>
+   <tbody>
+  {{#each-in model.player.stats as |stat baseValue|}}
+    <tr>
+      <td>
+        {{stat}}
+      </td>
+      <td>
+          {{baseValue}} &rarr; <span class="badge" style="background: limegreen">{{player/stat-modifier stat baseValue model.player.inventory}}</span>
+      </td>
+    </tr>
+  {{/each-in}}
+  </tbody>
+ </table>
+</div>

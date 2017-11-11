@@ -36,9 +36,14 @@ export default Ember.Controller.extend({
 				player.get('inventory').pushObject(item);
 
 			}
+
+			shop.save();
+
+			player.save();
 		},
 
 		sell (item, player, shop) {
+
 			let playerCash = player.get('cash');
 
 			let shopInventory = shop.get('inventory');

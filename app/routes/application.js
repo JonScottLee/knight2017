@@ -108,7 +108,7 @@ export default Ember.Route.extend({
 			name: "mana potion",
 			description: `It's not very impressive.`,
 			cost: 200,
-			sellValue: parseInt(1000 * .8, 10),
+			sellValue: parseInt(200 * .8, 10),
 			isInfinite: true
 		});
 

@@ -5,3 +5,23 @@
 </div>
 
 <p class="lead">{{model.item.description}}</p>
+
+{{#if model.item.subType}}
+	<h4>Type:</h4>
+	{{model.item.type}}
+
+	{{#if model.item.subType}}
+		({{model.item.subType}})
+	{{/if}}
+{{/if}}
+
+{{#if model.item.stats}}
+	<h4>Item Stats</h4>
+
+	{{#each-in model.item.stats as |key value|}}
+			{{key}}: {{value}}
+	{{/each-in}}
+{{/if}}
+
+<h4>Value:</h4>
+{{model.item.cost}}

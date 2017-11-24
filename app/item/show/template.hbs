@@ -19,9 +19,16 @@
 	<h4>Item Stats</h4>
 
 	{{#each-in model.item.stats as |key value|}}
-			{{key}}: {{value}}
+		{{key}}: {{value}}
 	{{/each-in}}
 {{/if}}
 
 <h4>Value:</h4>
 {{model.item.cost}}
+
+{{#if model.item.skill}}
+	<h4>Skills:</h4>
+	{{#each model.item.skill as |skill|}}
+	  <span class="badge">{{skill.friendlyName}}</span>
+	{{/each}}
+{{/if}}

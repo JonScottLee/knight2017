@@ -15,6 +15,12 @@
    <tbody>
 	{{#each model.player.inventory as |item|}}
 		{{#if item.wearable}}
+
+        {{#each item.skill as |skill|}}
+          {{skill.name}}
+        {{/each}}
+
+
   			{{#item/card--mini item=item tagName=""}}
           {{#if item.equipped}}
             <td>

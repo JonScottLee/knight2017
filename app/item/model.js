@@ -14,5 +14,6 @@ export default DS.Model.extend(Copyable, {
   subType: DS.attr(),
   type: DS.attr(),
   value: DS.attr('number'),
-  wearable: DS.attr('boolean')
+  wearable: DS.attr('boolean'),
+  usedSkills: DS.attr()
 });

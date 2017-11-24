@@ -21,9 +21,9 @@ export default Ember.Route.extend({
 			currentLevel: 1,
 			description: 'Your skill at wielding one-handed swords',
 			friendlyName: 'One-Handed Swords',
-			id: 'oneHandedSwords',
+			id: 'oneHandedSword',
 			maxLevel: 1000,
-			name: 'oneHandedSwords',
+			name: 'oneHandedSword',
 		});
 
 		let skill2 = this.store.createRecord('skill', {
@@ -39,8 +39,47 @@ export default Ember.Route.extend({
 		skill2.save();
 	},
 
+	makeDefaultGear () {
+		let gear1 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: false,
+			wearable: true,
+			name: "Jon's Awesome Sword",
+			description: `It's not really that awesome.`,
+			cost: 2000,
+			sellValue: parseInt(2000 * .8, 10),
+			type: 'weapon',
+			subType: 'oneHandedSword',
+			friendlySubtype: 'One-Handed Sword',
+			stats: {
+				atk: 10,
+				def: 5
+			},
+			usedSkills: ['oneHandedSword', 'fencing']
+		});
+
+		let gear2 = this.store.createRecord('item', {
+			quantity: 1,
+			consumable: false,
+			wearable: true,
+			name: "Jon's Dashing Cape",
+			description: `It's not really that dashing.`,
+			cost: 1250,
+			sellValue: parseInt(1250 * .8, 10),
+			type: 'accessory',
+			subType: 'back',
+			stats: {
+				hp: 10,
+				def: 1
+			}
+		});
+
+		gear1.save();
+		gear2.save();
+	},
+
 	getDefaultSkills () {
-		return this.store.findRecord('skill', 'oneHandedSwords');
+		return this.store.findRecord('skill', 'oneHandedSword');
 	},
 
 	getDefaultItems () {
@@ -63,70 +102,63 @@ export default Ember.Route.extend({
 			sellValue: parseInt(1000 * .8, 10)
 		});
 
-		let gear1 = this.store.createRecord('item', {
-			quantity: 1,
-			consumable: false,
-			wearable: true,
-			name: "Jon's Awesome Sword",
-			description: `It's not really that awesome.`,
-			cost: 2000,
-			sellValue: parseInt(2000 * .8, 10),
-			type: 'weapon',
-			subType: 'sword',
-			stats: {
-				atk: 10,
-				def: 5
-			}
-		});
-
-		let gear2 = this.store.createRecord('item', {
-			quantity: 1,
-			consumable: false,
-			wearable: true,
-			name: "Jon's Dashing Cape",
-			description: `It's not really that dashing.`,
-			cost: 1250,
-			sellValue: parseInt(1250 * .8, 10),
-			type: 'accessory',
-			subType: 'back',
-			stats: {
-				hp: 10,
-				def: 1
-			}
-		});
-
-		gear1.save();
-		gear2.save();
-
 		item1.save();
 		item2.save();
 
-		return [item1, item2, gear1, gear2];
+		return [item1, item2];
 	},
 
 	getPlayer () {
 		return this.store.findAll('player');
 	},
 
-	configurePlayer () {
+	configureGear () {
+		let promises = [];
+		let data = [];
 
+		let swords;
+		let oneHandedSwordSkill;
+
+		promises.push(this.store.findAll('item'));
+		promises.push(this.store.findAll('skill'));
+
+		Ember.RSVP.all(promises).then(function (data) {
+			swords = data[0].filterBy('subType', 'oneHandedSword');
+			oneHandedSwordSkill = data[1].filterBy('name', 'oneHandedSword').get('firstObject');
+
+			swords.forEach((sword) => {
+				sword.get('skill').pushObject(oneHandedSwordSkill);
+				sword.save();
+			});
+		});
+	},
+
+	configurePlayer () {
 		let promises = [];
 		let data = [];
 
 		let player;
 		let skills;
+		let gear;
 
 		promises.push(this.store.findAll('player'));
 		promises.push(this.store.findAll('skill'));
+		promises.push(this.store.findAll('item'));
 
 		Ember.RSVP.all(promises).then(function (data) {
 			player = data[0].get('firstObject');
 			skills = data[1];
+			gear = data[2].filterBy('wearable', true);
 
 			skills.forEach((skill) => {
 				player.get('skills').pushObject(skill);
-				player.save();
 			});
+
+			gear.forEach((gear) => {
+				player.get('inventory').pushObject(gear);
+			});
+
+			player.save();
 		});
 	},
 
@@ -149,6 +181,12 @@ export default Ember.Route.extend({
 			 		lastName: "Lee",
 			 		stats: this.getStats(),
 			 	});
+
+			 	this.makeDefaultGear();
+
+			 	this.configurePlayer();
+
+			 	this.configureGear();
 
 			 	player.save();
 			 }
@@ -192,8 +230,6 @@ export default Ember.Route.extend({
 	model() {
 
 		this.makeDefaultSkills();
-
-		this.configurePlayer();
 
 		this.makeDefaultPlayer();
 

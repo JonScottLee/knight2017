@@ -6,7 +6,8 @@ export default Ember.Route.extend({
 
 		return Ember.RSVP.hash({
 			player: this.store.findAll('player'),
-			item: this.store.findAll('item')
+			item: this.store.findAll('item'),
+			skill: this.store.findAll('skill')
 		});
 	}
 });

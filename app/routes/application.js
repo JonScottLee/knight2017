@@ -50,16 +50,17 @@ export default Ember.Route.extend({
 
 	makeDefaultGear () {
 		let gear1 = this.store.createRecord('item', {
-			quantity: 1,
 			consumable: false,
-			wearable: true,
-			name: "Jon's Awesome Sword",
-			description: `It's not really that awesome.`,
 			cost: 2000,
-			sellValue: parseInt(2000 * .8, 10),
-			type: 'weapon',
-			subType: 'oneHandedSword',
+			description: `It's not really that awesome.`,
+			friendlyType: 'Weapon',
 			friendlySubtype: 'One-Handed Sword',
+			name: "Jon's Awesome Sword",
+			quantity: 1,
+			sellValue: parseInt(2000 * .8, 10),
+			subType: 'oneHandedSword',
+			type: 'weapon',
+			wearable: true,
 			stats: {
 				atk: 10,
 				def: 5
@@ -68,15 +69,17 @@ export default Ember.Route.extend({
 		});
 
 		let gear2 = this.store.createRecord('item', {
-			quantity: 1,
 			consumable: false,
-			wearable: true,
-			name: "Jon's Dashing Cape",
-			description: `It's not really that dashing.`,
 			cost: 1250,
+			description: `It's not really that dashing.`,
+			friendlyType: 'Accessory',
+			friendlySubtype: 'Cape',
+			name: "Jon's Dashing Cape",
+			quantity: 1,
 			sellValue: parseInt(1250 * .8, 10),
-			type: 'accessory',
 			subType: 'back',
+			type: 'accessory',
+			wearable: true,
 			stats: {
 				hp: 10,
 				def: 1
@@ -86,10 +89,6 @@ export default Ember.Route.extend({
 
 		gear1.save();
 		gear2.save();
-	},
-
-	getDefaultSkills () {
-		return this.store.findRecord('skill', 'oneHandedSword');
 	},
 
 	getDefaultItems () {
@@ -116,10 +115,6 @@ export default Ember.Route.extend({
 		item2.save();
 
 		return [item1, item2];
-	},
-
-	getPlayer () {
-		return this.store.findAll('player');
 	},
 
 	configureGear () {
@@ -181,11 +176,10 @@ export default Ember.Route.extend({
 	makeDefaultPlayer () {
 		let store = this.store;
 
-		let promise = this.getPlayer();
 		let playerExists;
 		let player;
 
-		let fulfill = function (player) {
+		this.store.findAll('player').then((player) => {
 			playerExists = player.get('length');
 
 			if (!playerExists) {
@@ -206,9 +200,7 @@ export default Ember.Route.extend({
 
 			 	player.save();
 			 }
-		}.bind(this);
-
-		promise.then(fulfill);
+		});
 	},
 
 	makeDefaultShop () {

@@ -6,6 +6,8 @@ export default DS.Model.extend(Copyable, {
   cost: DS.attr('number'),
   description: DS.attr('string'),
   equipped: DS.attr('boolean'),
+  friendlySubtype: DS.attr('string'),
+  friendlyType: DS.attr('string'),
   name: DS.attr('string'),
   quantity: DS.attr(),
   sellValue: DS.attr('number'),
@@ -13,7 +15,7 @@ export default DS.Model.extend(Copyable, {
   stats: DS.attr(),
   subType: DS.attr(),
   type: DS.attr(),
+  usedSkills: DS.attr(),
   value: DS.attr('number'),
-  wearable: DS.attr('boolean'),
-  usedSkills: DS.attr()
+  wearable: DS.attr('boolean')
 });

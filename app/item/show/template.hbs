@@ -10,12 +10,12 @@
 
 <p class="lead">{{model.item.description}}</p>
 
-{{#if model.item.subType}}
+{{#if model.item.friendlyType}}
 	<h4>Type:</h4>
-	{{model.item.type}}
+	{{model.item.friendlyType}}
 
-	{{#if model.item.subType}}
-		({{model.item.subType}})
+	{{#if model.item.friendlySubtype}}
+		- {{model.item.friendlySubtype}}
 	{{/if}}
 {{/if}}
 

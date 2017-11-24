@@ -12,3 +12,7 @@
 		{{enemy.name}} <span class="badge">{{enemy.hp}}</span>
 	{{/each}}
 {{/unless}}
+
+<div>
+	<button class="btn btn-primary" {{action 'beginFight'}} disabled={{isDisabled}}>{{buttonText}}</button>
+</div>

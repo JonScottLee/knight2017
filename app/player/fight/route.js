@@ -10,6 +10,10 @@ export default Ember.Route.extend({
 		clearInterval(this.playerInterval);
 
 		this.controller.set('enemyKilled', true);
+
+		this.controller.set('buttonText', 'New Fight');
+
+		this.controller.set('isDisabled', false);
 	},
 
 	playerTurn (player) {
@@ -56,24 +60,34 @@ export default Ember.Route.extend({
 			}, 500);
 
 			self.inBattle = true;
+
+			self.controller.set('buttonText', 'Fight in progress...');
+
+			self.controller.set('isDisabled', true);
 		});
 	},
 
 	model () {
-		if (!this.inBattle) {
-			this.setupBattle();
-		}
-
-		let enemy = this.store.createRecord('enemy', {
-			name: 'Green Slime',
-			hp: 50
-		});
-
-		enemy.save();
-
 		return Ember.RSVP.hash({
 			player: this.store.findAll('player'),
 			enemy: this.store.findAll('enemy')
 		});
+	},
+
+	actions: {
+		beginFight () {
+			if (!this.inBattle) {
+				let enemy = this.store.createRecord('enemy', {
+					name: 'Green Slime',
+					hp: 50
+				});
+
+				enemy.save();
+
+				this.setupBattle();
+
+				this.controller.set('enemyKilled', false);
+			}
+		}
 	}
 });

@@ -201,15 +201,6 @@ export default Ember.Route.extend({
 		});
 	},
 
-	makeEnemyPool () {
-		let enemy1 = this.store.createRecord('enemy', {
-			name: 'Green Slime',
-			hp: 50
-		});
-
-		enemy1.save();
-	},
-
 	model () {
 		return this.store.findAll('player');
 	},
@@ -224,8 +215,6 @@ export default Ember.Route.extend({
 		 	});
 
 		 	player.save();
-
-		 	this.makeEnemyPool();
 
 		 	this.makeDefaultShop();
 

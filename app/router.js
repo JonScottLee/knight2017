@@ -29,6 +29,7 @@ Router.map(function() {
     });
 
     this.route('shop');
+    this.route('create');
   });
 
   this.route('options');

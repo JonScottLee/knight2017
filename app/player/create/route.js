@@ -41,6 +41,7 @@ export default Ember.Route.extend({
 
 		skill1.save();
 		skill2.save();
+		skill3.save();
 	},
 
 	makeDefaultGear () {

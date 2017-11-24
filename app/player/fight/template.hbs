@@ -1,0 +1,14 @@
+<h2 class="sub-header">Monster Hunting</h2>
+{{outlet}}
+{{currentEnemy}}
+{{#if enemyKilled}}
+	<div class="alert alert-success">
+		<h5>You killed the enemy!</h5>
+	</div>
+{{/if}}
+
+{{#unless enemyKilled}}
+	{{#each model.enemy as |enemy|}}
+		{{enemy.name}} <span class="badge">{{enemy.hp}}</span>
+	{{/each}}
+{{/unless}}

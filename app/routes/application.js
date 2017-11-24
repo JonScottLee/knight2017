@@ -35,6 +35,15 @@ export default Ember.Route.extend({
 			name: 'fencing',
 		});
 
+		let skill3 = this.store.createRecord('skill', {
+			currentLevel: 1,
+			description: 'Your ability to appear intimidating',
+			friendlyName: 'Intimidating Look',
+			id: 'intimidatingLook',
+			maxLevel: 1000,
+			name: 'intimidatingLook',
+		});
+
 		skill1.save();
 		skill2.save();
 	},
@@ -71,7 +80,8 @@ export default Ember.Route.extend({
 			stats: {
 				hp: 10,
 				def: 1
-			}
+			},
+			usedSkills: ['intimidatingLook']
 		});
 
 		gear1.save();
@@ -116,19 +126,25 @@ export default Ember.Route.extend({
 		let promises = [];
 		let data = [];
 
-		let swords;
-		let oneHandedSwordSkill;
+		let gears;
+		let skill;
+		let allSkills;
 
 		promises.push(this.store.findAll('item'));
 		promises.push(this.store.findAll('skill'));
 
 		Ember.RSVP.all(promises).then(function (data) {
-			swords = data[0].filterBy('subType', 'oneHandedSword');
-			oneHandedSwordSkill = data[1].filterBy('name', 'oneHandedSword').get('firstObject');
+			gears = data[0].filterBy('wearable', true);
+			allSkills = data[1];
 
-			swords.forEach((sword) => {
-				sword.get('skill').pushObject(oneHandedSwordSkill);
-				sword.save();
+			gears.forEach((gear) => {
+				if (gear.get('usedSkills')) {
+					gear.get('usedSkills').forEach((skillRef) => {
+						skill = allSkills.filterBy('name', skillRef).get('firstObject');
+						gear.get('skill').pushObject(skill);
+						gear.save();
+					});
+				}
 			});
 		});
 	},

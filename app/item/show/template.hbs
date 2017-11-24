@@ -2,6 +2,10 @@
 
 <div class="page-header">
 	<h1>{{model.item.name}}</h1>
+
+	{{#if model.item.equipped}}
+		{{item/equipped-badge}}
+	{{/if}}
 </div>
 
 <p class="lead">{{model.item.description}}</p>

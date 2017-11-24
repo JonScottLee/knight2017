@@ -16,23 +16,31 @@ export default Ember.Route.extend({
 		};
 	},
 
-	getDefaultSkills () {
-
-		let player = this.store.peekAll('player');
-
+	makeDefaultSkills () {
 		let skill1 = this.store.createRecord('skill', {
 			currentLevel: 1,
-			description: 'Your skill at wielding one-handed swords.',
+			description: 'Your skill at wielding one-handed swords',
 			friendlyName: 'One-Handed Swords',
 			id: 'oneHandedSwords',
 			maxLevel: 1000,
 			name: 'oneHandedSwords',
-			player: player
+		});
+
+		let skill2 = this.store.createRecord('skill', {
+			currentLevel: 1,
+			description: 'Your fencing skill',
+			friendlyName: 'Fencing',
+			id: 'fencing',
+			maxLevel: 1000,
+			name: 'fencing',
 		});
 
 		skill1.save();
+		skill2.save();
+	},
 
-		return [skill1];
+	getDefaultSkills () {
+		return this.store.findRecord('skill', 'oneHandedSwords');
 	},
 
 	getDefaultItems () {
@@ -96,27 +104,57 @@ export default Ember.Route.extend({
 		return [item1, item2, gear1, gear2];
 	},
 
+	getPlayer () {
+		return this.store.findAll('player');
+	},
+
+	configurePlayer () {
+
+		let promises = [];
+		let data = [];
+
+		let player;
+		let skills;
+
+		promises.push(this.store.findAll('player'));
+		promises.push(this.store.findAll('skill'));
+
+		Ember.RSVP.all(promises).then(function (data) {
+			player = data[0].get('firstObject');
+			skills = data[1];
+
+			skills.forEach((skill) => {
+				player.get('skills').pushObject(skill);
+				player.save();
+			});
+		});
+	},
+
 	makeDefaultPlayer () {
+		let store = this.store;
+
+		let promise = this.getPlayer();
+		let playerExists;
 		let player;
 
-		this.store.findAll('player').then((thePlayer) => {
+		let fulfill = function (player) {
+			playerExists = player.get('length');
 
-			if (!thePlayer.get('length')) {
+			if (!playerExists) {
 
-				player = this.store.createRecord('player', {
-			 		firstName:"Jon",
-			 		lastName: "Lee",
-			 		inventory: this.getDefaultItems(),
+				player = store.createRecord('player', {
 			 		cash: 1525,
+			 		firstName:"Jon",
+			 		inventory: this.getDefaultItems(),
+			 		lastName: "Lee",
 			 		stats: this.getStats(),
-			 		skills: this.getDefaultSkills(),
 			 	});
 
 			 	player.save();
+			 }
+		}.bind(this);
 
-			 	return player;
-			}
-		});
+		promise.then(fulfill);
 	},
 
 	makeDefaultShop () {
@@ -152,6 +190,10 @@ export default Ember.Route.extend({
 	},
 
 	model() {
+
+		this.makeDefaultSkills();
+
+		this.configurePlayer();
 
 		this.makeDefaultPlayer();
 

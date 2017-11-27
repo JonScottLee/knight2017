@@ -109,6 +109,18 @@ export default Ember.Route.extend({
 			if (enemyHP <= 0) {
 				this.killEnemy();
 			}
+
+			this.controller.set('attackBtnDisabled', true);
+
+			this.controller.set('attackBtnText', 'Recovering...');
+
+			setTimeout(() => {
+
+				this.controller.set('attackBtnDisabled', false);
+
+				this.controller.set('attackBtnText', 'Attack!');
+
+			}, 1000);
 		}
 	}
 });

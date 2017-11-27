@@ -25,6 +25,6 @@ EXP: <span class="badge">{{model.player.exp.current}} / {{model.player.exp.cap}}
 	{{/unless}}
 
 	{{#if inBattle}}
-		<button class="btn btn-danger" {{action 'playerAction'}} disabled={{attackBtnDisabled}}>{{playerActionText}}</button>
+		<button class="btn btn-danger" {{action 'playerAction'}} disabled={{attackBtnDisabled}}>{{attackBtnText}}</button>
 	{{/if}}
 </div>

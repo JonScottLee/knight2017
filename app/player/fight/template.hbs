@@ -1,30 +1,38 @@
 <h2 class="sub-header">Monster Hunting</h2>
+
 {{outlet}}
 
-EXP: <span class="badge">{{model.player.exp.current}} / {{model.player.exp.cap}}</span>
+<section class="battle__info">
 
-{{currentEnemy}}
-{{#if enemyKilled}}
-	<p class="alert alert-success">
-		You killed the enemy!
-	</p>
-{{/if}}
+	{{currentEnemy}}
+	{{#if enemyKilled}}
+		<p class="alert alert-success">
+			You killed the enemy!
+		</p>
+	{{/if}}
 
-{{#unless enemyKilled}}
+	{{#unless enemyKilled}}
 
-	{{battle/hp-bar entity=model.player backgroundColor=playerHPColor}}
+		{{#battle/hp-bar entity=model.player backgroundColor=""}}
+			{{model.player.name}}
+		{{/battle/hp-bar}}
 
-	{{#each model.enemy as |enemy|}}
-		{{battle/hp-bar entity=enemy backgroundColor=enemyHPColor}}
-	{{/each}}
-{{/unless}}
+		{{#each model.enemy as |enemy|}}
+		    {{# battle/hp-bar entity=enemy backgroundColor="orange"}}
+		    	{{enemy.name}}
+		    {{/battle/hp-bar}}
+		    <p>{{enemy.description}}</p>
+		{{/each}}
 
-<div>
-	{{#unless inBattle}}
-		<button class="btn btn-primary" {{action 'beginFight'}} disabled={{beginBtnDisabled}}>{{beginButtonText}}</button>
 	{{/unless}}
 
-	{{#if inBattle}}
-		<button class="btn btn-danger" {{action 'playerAction'}} disabled={{attackBtnDisabled}}>{{attackBtnText}}</button>
-	{{/if}}
-</div>
+	<div>
+		{{#unless inBattle}}
+			<button class="btn btn-primary" {{action 'beginFight'}} disabled={{beginBtnDisabled}}>{{beginButtonText}}</button>
+		{{/unless}}
+
+		{{#if inBattle}}
+			<button class="btn btn-danger" {{action 'playerAction'}} disabled={{attackBtnDisabled}}>{{attackBtnText}}</button>
+		{{/if}}
+	</div>
+</section>

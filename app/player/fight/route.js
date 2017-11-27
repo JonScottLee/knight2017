@@ -77,6 +77,7 @@ export default Ember.Route.extend({
 			if (!this.controller.get('inBattle')) {
 				let enemy = this.store.createRecord('enemy', {
 					currentHP: 50,
+					description: `Slimes are gross. This one is all oozey. Also green.`,
 					exp: {
 						current: 0,
 						cap: 0,

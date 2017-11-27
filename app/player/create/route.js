@@ -208,6 +208,10 @@ export default Ember.Route.extend({
 	actions: {
 		handleSubmitInRoute (data) {
 			let player = this.store.createRecord('player', {
+		 		exp: {
+		 			current: 0,
+		 			cap: 1000
+		 		},
 		 		cash: 1525,
 		 		currentHP: 100,
 		 		id: 0,

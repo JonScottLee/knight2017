@@ -4,6 +4,7 @@ export default DS.Model.extend({
 	cash: DS.attr('number'),
 	currentHP: DS.attr('number'),
 	equippedItems: DS.hasMany('item'),
+	exp: DS.attr(),
 	inventory: DS.hasMany('item'),
 	maxHP: DS.attr('number'),
 	name: DS.attr('string'),

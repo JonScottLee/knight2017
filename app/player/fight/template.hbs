@@ -1,6 +1,8 @@
 <h2 class="sub-header">Monster Hunting</h2>
 {{outlet}}
 
+EXP: <span class="badge">{{model.player.exp.current}} / {{model.player.exp.cap}}</span>
+
 {{currentEnemy}}
 {{#if enemyKilled}}
 	<p class="alert alert-success">

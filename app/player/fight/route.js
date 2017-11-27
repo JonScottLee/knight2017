@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 
 	killEnemy () {
+		let playerEXP = this.player.get('exp.current');
+
+		let enemyEXPVal = this.enemy.get('exp.value');
+
 		this.enemy.destroyRecord();
 
 		this.controller.set('inBattle', false);
@@ -14,6 +18,12 @@ export default Ember.Route.extend({
 		this.controller.set('buttonText', 'New Fight');
 
 		this.controller.set('isDisabled', false);
+
+		playerEXP += enemyEXPVal;
+
+		this.player.set('exp.current', playerEXP);
+
+		this.player.save();
 	},
 
 	enemyTurn (enemy) {
@@ -67,6 +77,11 @@ export default Ember.Route.extend({
 			if (!this.controller.get('inBattle')) {
 				let enemy = this.store.createRecord('enemy', {
 					currentHP: 50,
+					exp: {
+						current: 0,
+						cap: 0,
+						value: 50
+					},
 					maxHP: 50,
 					name: 'Green Slime',
 					stats: {

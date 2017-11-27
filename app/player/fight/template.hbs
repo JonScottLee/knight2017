@@ -1,5 +1,6 @@
 <h2 class="sub-header">Monster Hunting</h2>
 {{outlet}}
+
 {{currentEnemy}}
 {{#if enemyKilled}}
 	<p class="alert alert-success">
@@ -8,8 +9,11 @@
 {{/if}}
 
 {{#unless enemyKilled}}
+
+	{{battle/hp-bar entity=model.player backgroundColor=playerHPColor}}
+
 	{{#each model.enemy as |enemy|}}
-		{{enemy.name}} <span class="badge">{{enemy.hp}}</span>
+		{{battle/hp-bar entity=enemy backgroundColor=enemyHPColor}}
 	{{/each}}
 {{/unless}}
 

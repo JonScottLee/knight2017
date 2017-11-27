@@ -4,5 +4,7 @@ export default Ember.Controller.extend({
 	beginButtonText: `Begin Fight`,
 	enemyKilled: false,
 	inBattle: false,
-	playerActionText: `Attack!`
+	playerActionText: `Attack!`,
+	enemyHPColor: '#F53435',
+	playerHPColor: '#42A48D'
 });

@@ -17,7 +17,15 @@ export default Ember.Route.extend({
 	},
 
 	enemyTurn (enemy) {
+		let playerHP = this.player.get('currentHP');
 
+		let enemyDMG = this.enemy.get('stats.dmg');
+
+		playerHP -= enemyDMG;
+
+		this.player.set('currentHP', playerHP);
+
+		this.player.save();
 	},
 
 	setupBattle () {
@@ -41,15 +49,15 @@ export default Ember.Route.extend({
 
 			self.playerInterval = setInterval(() => {
 
-				// self.enemyTurn(enemy);
+				self.enemyTurn();
 
-			}, 500);
+			}, 2000);
 		});
 	},
 
 	model () {
 		return Ember.RSVP.hash({
-			player: this.store.findAll('player'),
+			player: this.store.findRecord('player', 0),
 			enemy: this.store.findAll('enemy')
 		});
 	},
@@ -58,8 +66,12 @@ export default Ember.Route.extend({
 		beginFight () {
 			if (!this.controller.get('inBattle')) {
 				let enemy = this.store.createRecord('enemy', {
+					currentHP: 50,
+					maxHP: 50,
 					name: 'Green Slime',
-					hp: 50
+					stats: {
+						dmg: 5
+					}
 				});
 
 				enemy.save();
@@ -73,11 +85,11 @@ export default Ember.Route.extend({
 		},
 
 		playerAction () {
-			let enemyHP = this.enemy.get('hp');
+			let enemyHP = this.enemy.get('currentHP');
 
 			enemyHP -= 10;
 
-			this.enemy.set('hp', enemyHP);
+			this.enemy.set('currentHP', enemyHP);
 
 			if (enemyHP <= 0) {
 				this.killEnemy();

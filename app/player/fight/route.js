@@ -86,7 +86,7 @@ export default Ember.Route.extend({
 					maxHP: 50,
 					name: 'Green Slime',
 					stats: {
-						dmg: 2;
+						dmg: 2
 					}
 				});
 

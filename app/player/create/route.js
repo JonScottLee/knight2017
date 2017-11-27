@@ -226,11 +226,9 @@ export default Ember.Route.extend({
 
 		 	this.configureGear();
 
-
-
 		 	this.controllerFor('player').set('playerCreated', true);
 
-		 	this.transitionTo('player');
+		 	this.transitionTo('player.fight');
 		}
 	}
 });

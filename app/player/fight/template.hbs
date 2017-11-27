@@ -2,9 +2,9 @@
 {{outlet}}
 {{currentEnemy}}
 {{#if enemyKilled}}
-	<div class="alert alert-success">
-		<h5>You killed the enemy!</h5>
-	</div>
+	<p class="alert alert-success">
+		You killed the enemy!
+	</p>
 {{/if}}
 
 {{#unless enemyKilled}}
@@ -14,5 +14,11 @@
 {{/unless}}
 
 <div>
-	<button class="btn btn-primary" {{action 'beginFight'}} disabled={{isDisabled}}>{{buttonText}}</button>
+	{{#unless inBattle}}
+		<button class="btn btn-primary" {{action 'beginFight'}} disabled={{beginBtnDisabled}}>{{beginButtonText}}</button>
+	{{/unless}}
+
+	{{#if inBattle}}
+		<button class="btn btn-danger" {{action 'playerAction'}} disabled={{attackBtnDisabled}}>{{playerActionText}}</button>
+	{{/if}}
 </div>

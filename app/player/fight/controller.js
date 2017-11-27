@@ -1,9 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Controller.extend({
-
-	buttonText: "Begin Fight",
+	beginButtonText: `Begin Fight`,
 	enemyKilled: false,
-	isDisabled: false
-
+	inBattle: false,
+	playerActionText: `Attack!`
 });

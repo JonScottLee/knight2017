@@ -5,7 +5,7 @@ export default Ember.Route.extend({
 	killEnemy () {
 		this.enemy.destroyRecord();
 
-		this.inBattle = false;
+		this.controller.set('inBattle', false);
 
 		clearInterval(this.playerInterval);
 
@@ -14,18 +14,6 @@ export default Ember.Route.extend({
 		this.controller.set('buttonText', 'New Fight');
 
 		this.controller.set('isDisabled', false);
-	},
-
-	playerTurn (player) {
-		let enemyHP = this.enemy.get('hp');
-
-		enemyHP -= 10;
-
-		this.enemy.set('hp', enemyHP);
-
-		if (enemyHP <= 0) {
-			this.killEnemy();
-		}
 	},
 
 	enemyTurn (enemy) {
@@ -53,17 +41,9 @@ export default Ember.Route.extend({
 
 			self.playerInterval = setInterval(() => {
 
-				self.playerTurn(player);
-
 				// self.enemyTurn(enemy);
 
 			}, 500);
-
-			self.inBattle = true;
-
-			self.controller.set('buttonText', 'Fight in progress...');
-
-			self.controller.set('isDisabled', true);
 		});
 	},
 
@@ -76,7 +56,7 @@ export default Ember.Route.extend({
 
 	actions: {
 		beginFight () {
-			if (!this.inBattle) {
+			if (!this.controller.get('inBattle')) {
 				let enemy = this.store.createRecord('enemy', {
 					name: 'Green Slime',
 					hp: 50
@@ -86,7 +66,21 @@ export default Ember.Route.extend({
 
 				this.setupBattle();
 
+				this.controller.set('inBattle', true);
+
 				this.controller.set('enemyKilled', false);
+			}
+		},
+
+		playerAction () {
+			let enemyHP = this.enemy.get('hp');
+
+			enemyHP -= 10;
+
+			this.enemy.set('hp', enemyHP);
+
+			if (enemyHP <= 0) {
+				this.killEnemy();
 			}
 		}
 	}
